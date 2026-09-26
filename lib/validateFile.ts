@@ -1,6 +1,6 @@
 import type { PlatformRule } from "@/data/platformRules";
 import type { FileInspection } from "@/lib/inspectFile";
-import { formatBytes } from "@/lib/format";
+import { formatBytes } from "./format";
 
 export type CheckStatus = "passed" | "failed" | "not-checked";
 export interface ValidationCheck {

@@ -25,6 +25,7 @@ Open <http://localhost:3000>. Quality checks:
 ```bash
 pnpm lint
 pnpm typecheck
+pnpm test
 pnpm build
 ```
 
@@ -34,6 +35,7 @@ pnpm build
 - `components/` — home sections and the interactive checker flow.
 - `lib/inspectFile.ts` — detects file format from header bytes and reads image or video dimensions locally.
 - `lib/validateFile.ts` — reusable format, size, resolution, and aspect ratio checks.
+- `tests/checker.test.ts` — Node's built-in test runner covers signatures, bad files, cleanup, and validation without an additional test dependency.
 - `data/platformRules.ts` — destination profiles, limits, notes, and source links. Update this file as platform rules change.
 - `data/platformPages.ts` and `data/guides.ts` — distinct public page copy and scalable guide content, separate from validation rules.
 - `lib/seo.ts` and `lib/siteUrl.ts` — shared metadata and origin configuration.
@@ -46,6 +48,8 @@ FileReady recognizes JPG, PNG, WebP, MP4, and PDF by file signature rather than 
 
 These profiles are **guidance, not a guarantee of acceptance**. Third-party behavior can depend on post type, device, account, app version, transcoding, and multiple attachments. For example, Gmail's 25 MB limit applies to the total attachments in one message. Reference links appear in each result.
 
+Results show **Passed**, **Failed**, or **Not checked** for each available rule. A ready result means only that the file meets the checked requirements in the selected reference profile. The interface shows loading only while the browser is reading the file; validation results appear when the comparison is complete.
+
 ## Current V1 limitations
 
 - One file is checked at a time. No batch checks, conversion, or compression.
@@ -54,7 +58,7 @@ These profiles are **guidance, not a guarantee of acceptance**. Third-party beha
 - Platform limits and accepted formats can change. Destination profiles should be reviewed regularly.
 - The Instagram reference is intentionally conservative: its image checks follow the cited JPG publishing flow. An Instagram app may accept other formats or convert them.
 
-## Roadmap
+## V2 roadmap
 
 Add explicit post types (for example, Instagram feed versus Reels), verify more media properties, support additional destinations, and offer optional batch checking while keeping inspection local.
 

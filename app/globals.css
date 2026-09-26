@@ -109,6 +109,7 @@ svg { width: 1.25rem; height: 1.25rem; }
 .dropzone > span:not(.upload-icon) { color: #0F172A89; font-size: .85rem; }
 .dropzone .browse-text { color: #2563EB; font-weight: 850; text-decoration: underline; text-underline-offset: 3px; }
 .dropzone .dropzone-formats { margin-top: .55rem; padding: .45rem .7rem; border: 1px solid #0F172A14; border-radius: 100px; font-size: .72rem !important; font-weight: 700; }
+.inspection-status { margin: 1rem 0 0; color: #0F172A9b; font-size: .85rem; text-align: center; }
 .upload-error { margin-top: 1rem; padding: 1rem 1.2rem; border: 1px solid #DC262644; background: #DC262609; border-radius: .9rem; color: #DC2626; }
 .upload-error p { margin: .4rem 0; }
 .upload-error span { font-size: .8rem; }
@@ -117,8 +118,8 @@ svg { width: 1.25rem; height: 1.25rem; }
 .file-details-heading { display: flex; align-items: center; gap: .8rem; min-width: 0; }
 .file-details-icon { display: grid; place-items: center; flex: none; width: 45px; height: 45px; color: #2563EB; background: #2563EB12; border-radius: .8rem; }
 .file-details-heading > div { min-width: 0; flex: 1; }
-.file-details h3 { font-size: 1.05rem; margin: .15rem 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.text-button { border: 0; background: transparent; color: #2563EB; font-size: .8rem; font-weight: 800; padding: .45rem; white-space: nowrap; }
+.file-details h3 { font-size: 1.05rem; margin: .15rem 0 0; overflow-wrap: anywhere; }
+.text-button { min-height: 44px; border: 0; background: transparent; color: #2563EB; font-size: .8rem; font-weight: 800; padding: .45rem; white-space: nowrap; }
 .text-button:hover { text-decoration: underline; }
 .file-details-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem; margin: 1.2rem 0 0; }
 .file-details-grid div { border-top: 1px solid #0F172A13; padding-top: .75rem; min-width: 0; }
@@ -139,17 +140,6 @@ svg { width: 1.25rem; height: 1.25rem; }
 .platform-copy strong { font-size: .86rem; }
 .platform-copy small { color: #0F172A83; font-size: .67rem; line-height: 1.35; }
 .platform-arrow { position: absolute; top: 1.1rem; right: .95rem; width: .9rem; color: #0F172A6f; }
-.checking-card { text-align: center; padding: 3rem 1rem 2rem; }
-.checking-spinner { display: inline-block; width: 49px; height: 49px; border-radius: 50%; border: 4px solid #2563EB21; border-top-color: #2563EB; animation: spin .8s linear infinite; }
-.checking-card h3 { font-size: 1.5rem; letter-spacing: -.04em; margin: 1.2rem 0 .35rem; }
-.checking-card p { color: #0F172A8c; font-size: .85rem; }
-.checking-stages { display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
-.checking-stages > span { display: inline-flex; align-items: center; gap: .35rem; padding: .5rem .7rem; border: 1px solid #0F172A16; border-radius: 100px; color: #0F172A77; font-size: .7rem; font-weight: 750; }
-.checking-stages .stage-active { color: #2563EB; border-color: #2563EB66; }
-.checking-stages .stage-done { color: #16A34A; border-color: #16A34A44; }
-.checking-stages svg { width: .8rem; height: .8rem; }
-.stage-circle { width: .5rem; height: .5rem; border: 1px solid currentColor; border-radius: 50%; }
-@keyframes spin { to { transform: rotate(360deg); } }
 .result-card { margin-top: 1.5rem; }
 .result-top { display: flex; gap: 1rem; align-items: flex-start; }
 .result-emblem { width: 50px; height: 50px; flex: none; border-radius: .9rem; display: grid; place-items: center; }
@@ -171,7 +161,8 @@ svg { width: 1.25rem; height: 1.25rem; }
 .check-status.not-checked { color: #0F172A83; }
 .recommendation { margin-top: 1rem; padding: 1rem; border: 1px solid #DC26263d; border-radius: .8rem; background: #DC262608; }
 .recommendation strong { color: #DC2626; font-size: .83rem; }
-.recommendation p { margin: .4rem 0 0; font-size: .8rem; line-height: 1.5; }
+.recommendation ul { margin: .5rem 0 0; padding-left: 1.2rem; font-size: .8rem; line-height: 1.55; }
+.recommendation li + li { margin-top: .35rem; }
 .result-note { margin: 1rem 0 1.3rem; color: #0F172A92; font-size: .75rem; line-height: 1.6; }
 .result-note a { color: #2563EB; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
 
@@ -234,6 +225,7 @@ svg { width: 1.25rem; height: 1.25rem; }
 .content-hero { padding-block: clamp(2.5rem, 6vw, 4.6rem); }
 .content-hero h1, .article-header h1 { max-width: 840px; font-size: clamp(2.6rem, 5.1vw, 4.8rem); line-height: 1.08; letter-spacing: -.068em; margin: .8rem 0 1rem; }
 .content-hero > p, .article-header > p { max-width: 730px; color: #0F172Aa8; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.72; margin: 0 0 1.5rem; }
+.not-found-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .content-section { padding-block: clamp(3.5rem, 7vw, 6rem); }
 .content-section.content-tint { background: #2563EB07; }
 .content-narrow { max-width: 950px; }
@@ -310,7 +302,7 @@ svg { width: 1.25rem; height: 1.25rem; }
   .nav-cta { min-height: 44px; padding: .5rem .68rem; font-size: .7rem; }.nav-cta svg { display: none; }.brand { font-size: 1.1rem; }.brand-mark { width: 26px; height: 30px; }
   .hero { padding-top: 3rem; }.hero h1 { font-size: clamp(3rem, 12vw, 4rem); }.hero-actions { align-items: flex-start; flex-direction: column; gap: .8rem; }.hero-art { height: 285px; transform: scale(.57); width: 500px; left: 50%; margin-left: -250px; }
   .checker-section { padding-block: 3.8rem 4.4rem; }.privacy-chip { white-space: normal; }.checker-content { padding: 1rem; }.checker-shell { border-radius: 1.1rem; }.checker-shell-top { padding-inline: 1rem; }
-  .dropzone { min-height: 245px; }.dropzone strong { font-size: 1.1rem; }.file-details-grid { grid-template-columns: repeat(2, 1fr); }.file-details-heading { flex-wrap: wrap; }.file-details-heading .text-button { margin-left: auto; }
+  .dropzone { min-height: 245px; }.dropzone strong { font-size: 1.1rem; }.file-details-grid { grid-template-columns: repeat(2, 1fr); }.file-details-heading { display: grid; grid-template-columns: 45px minmax(0, 1fr); }.file-details-heading > div { grid-column: 2; }.file-details-heading .text-button { grid-column: 2; justify-self: start; }
   .platform-grid { grid-template-columns: repeat(2, 1fr); gap: .55rem; }.platform-card { padding: .75rem; min-height: 125px; }.platform-copy small { font-size: .6rem; }
   .network-art { width: 500px; left: 50%; margin-left: -250px; transform: scale(.65); height: 315px; transform-origin: center top; }
   .privacy-visual { transform: scale(.85); margin-inline: -2rem; }

@@ -37,48 +37,53 @@ const mimeByFormat: Record<FileFormat, string> = {
 };
 
 async function readImageDimensions(file: File): Promise<{ width: number; height: number }> {
+  const image = new Image();
   const url = URL.createObjectURL(file);
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     return await new Promise((resolve, reject) => {
-      const image = new Image();
-      const timer = window.setTimeout(() => reject(new InspectionError("This image could not be read. It may be damaged or encoded in an unsupported way.")), 15000);
+      timer = setTimeout(() => reject(new InspectionError("This image could not be read. It may be damaged or encoded in an unsupported way.")), 15000);
       image.onload = () => {
-        window.clearTimeout(timer);
-        resolve({ width: image.naturalWidth, height: image.naturalHeight });
+        if (image.naturalWidth > 0 && image.naturalHeight > 0) resolve({ width: image.naturalWidth, height: image.naturalHeight });
+        else reject(new InspectionError("This image could not be read. It may be damaged or encoded in an unsupported way."));
       };
       image.onerror = () => {
-        window.clearTimeout(timer);
         reject(new InspectionError("This image could not be read. It may be damaged or encoded in an unsupported way."));
       };
       image.src = url;
     });
   } finally {
+    if (timer !== undefined) clearTimeout(timer);
+    image.onload = null;
+    image.onerror = null;
     URL.revokeObjectURL(url);
   }
 }
 
 async function readVideoMetadata(file: File): Promise<{ width: number; height: number; duration?: number }> {
-  const url = URL.createObjectURL(file);
   const video = document.createElement("video");
+  const url = URL.createObjectURL(file);
   video.preload = "metadata";
   video.muted = true;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     return await new Promise((resolve, reject) => {
-      const timer = window.setTimeout(() => reject(new InspectionError("This video could not be inspected in your browser. It may be damaged or use an unsupported codec.")), 15000);
+      timer = setTimeout(() => reject(new InspectionError("This video could not be inspected in your browser. It may be damaged or use an unsupported codec.")), 15000);
       video.onloadedmetadata = () => {
-        window.clearTimeout(timer);
-        resolve({ width: video.videoWidth, height: video.videoHeight, duration: Number.isFinite(video.duration) ? video.duration : undefined });
+        if (video.videoWidth > 0 && video.videoHeight > 0) resolve({ width: video.videoWidth, height: video.videoHeight, duration: Number.isFinite(video.duration) ? video.duration : undefined });
+        else reject(new InspectionError("This video could not be inspected in your browser. It may be damaged or use an unsupported codec."));
       };
       video.onerror = () => {
-        window.clearTimeout(timer);
         reject(new InspectionError("This video could not be inspected in your browser. It may be damaged or use an unsupported codec."));
       };
       video.src = url;
     });
   } finally {
-    video.removeAttribute("src");
-    video.load();
-    URL.revokeObjectURL(url);
+    if (timer !== undefined) clearTimeout(timer);
+    video.onloadedmetadata = null;
+    video.onerror = null;
+    try { video.removeAttribute("src"); video.load(); }
+    finally { URL.revokeObjectURL(url); }
   }
 }
 
@@ -104,8 +109,14 @@ export async function inspectFile(file: File): Promise<FileInspection> {
     kind: format === "MP4" ? "video" : format === "PDF" ? "document" : "image",
   };
 
-  if (base.kind === "image") return { ...base, ...await readImageDimensions(file) };
-  if (base.kind === "video") return { ...base, ...await readVideoMetadata(file) };
+  if (base.kind === "image") {
+    try { return { ...base, ...await readImageDimensions(file) }; }
+    catch { throw new InspectionError("This image could not be read. It may be damaged or encoded in an unsupported way."); }
+  }
+  if (base.kind === "video") {
+    try { return { ...base, ...await readVideoMetadata(file) }; }
+    catch { throw new InspectionError("This video could not be inspected in your browser. It may be damaged or use an unsupported codec."); }
+  }
   try {
     const ending = await file.slice(Math.max(0, file.size - 4096)).text();
     if (!ending.includes("%%EOF")) throw new InspectionError("This PDF appears incomplete or damaged. Try exporting it again.");
