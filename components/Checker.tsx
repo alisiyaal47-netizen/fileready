@@ -13,7 +13,7 @@ import { validateFile, type ValidationResult } from "@/lib/validateFile";
 
 const stages = ["Format", "Size", "Dimensions", "Aspect ratio"];
 
-export function Checker() {
+export function Checker({ defaultPlatformId, heading = "Make every upload a sure thing.", intro = "Start with a file. We'll read its details right here in your browser." }: { defaultPlatformId?: PlatformId; heading?: string; intro?: string }) {
   const [file, setFile] = useState<FileInspection | null>(null);
   const [error, setError] = useState("");
   const [inspecting, setInspecting] = useState(false);
@@ -39,7 +39,14 @@ export function Checker() {
     setInspecting(true);
     try {
       const inspected = await inspectFile(selected);
-      if (id === requestId.current) setFile(inspected);
+      if (id === requestId.current) {
+        setFile(inspected);
+        if (defaultPlatformId) {
+          setPlatformId(defaultPlatformId);
+          setResult(validateFile(inspected, getPlatformRule(defaultPlatformId)));
+          setStage(0);
+        }
+      }
     } catch (cause) {
       if (id === requestId.current) setError(cause instanceof Error ? cause.message : "This file could not be inspected.");
     } finally {
@@ -65,7 +72,7 @@ export function Checker() {
   }
 
   return <section id="checker" className="checker-section" aria-labelledby="checker-heading"><div className="container">
-    <div className="checker-intro"><div><span className="overline">THE FILE CHECKER</span><h2 id="checker-heading">Make every upload a sure thing.</h2><p>Start with a file. We&apos;ll read its details right here in your browser.</p></div><span className="privacy-chip"><LockIcon /> Your file stays on your device</span></div>
+    <div className="checker-intro"><div><span className="overline">THE FILE CHECKER</span><h2 id="checker-heading">{heading}</h2><p>{intro}</p></div><span className="privacy-chip"><LockIcon /> Your file stays on your device</span></div>
     <div className="checker-shell"><div className="checker-shell-top"><span><span className="shell-dot"/> READY TO CHECK</span><span>01 / 03</span></div><div className="checker-content">
       {!file && <FileUploader onFile={handleFile} busy={inspecting} />}
       {error && <div className="upload-error" role="alert"><strong>We couldn&apos;t check that file.</strong><p>{error}</p><span>Choose a supported file and try again.</span></div>}

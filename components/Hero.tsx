@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowIcon, CheckIcon, SparkIcon } from "@/components/Icons";
 
 const cards = [
@@ -22,7 +19,7 @@ export function Hero() {
     <div className="hero-art" aria-label="Illustration of floating JPG, PNG, MP4 and PDF file cards" role="img">
       <div className="art-orbit art-orbit-one"/><div className="art-orbit art-orbit-two"/><div className="art-glow"/>
       <div className="art-center"><span className="art-center-icon"><CheckIcon /></span><span className="art-center-title">FileReady</span><span className="art-center-sub">Ready when you are</span></div>
-      {cards.map((card, index) => <motion.div key={card.format} className={`floating-file ${card.className}`} animate={{ y: [0, -9, 0], rotate: index % 2 ? [5, 3, 5] : [-5, -3, -5] }} transition={{ duration: 4.5 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}><span className="floating-file-fold"/><span className="floating-file-symbol">{card.format === "MP4" ? "▶" : card.format === "PDF" ? "≡" : "◈"}</span><strong>{card.format}</strong><small>{card.caption}</small></motion.div>)}
+      {cards.map((card) => <div key={card.format} className={`floating-file ${card.className}`}><span className="floating-file-fold"/><span className="floating-file-symbol">{card.format === "MP4" ? "▶" : card.format === "PDF" ? "≡" : "◈"}</span><strong>{card.format}</strong><small>{card.caption}</small></div>)}
       <span className="art-spark art-spark-one">✦</span><span className="art-spark art-spark-two">✦</span>
     </div>
   </section>;

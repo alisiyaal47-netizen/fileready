@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { platformPageList } from "@/data/platformPages";
+import { guides } from "@/data/guides";
+
+export function HomeExplore() {
+  return <section className="section explore-section" aria-labelledby="explore-heading"><div className="container"><div className="section-heading center"><span className="overline">CHECK THE DESTINATION</span><h2 id="explore-heading">A clearer answer for where it&apos;s going.</h2><p>Choose a specific upload flow to see the rules FileReady can check and where the result has limits.</p></div><div className="explore-platform-grid">{platformPageList.map((page) => <article className="explore-card" key={page.id}><h3><Link href={page.path}>{page.heading}</Link></h3><p>{page.checksIntroduction}</p><Link className="text-link" href={page.path}>Open {page.id === "gmail" ? "Gmail attachment" : page.id === "whatsapp" ? "WhatsApp document" : page.id === "instagram" ? "Instagram file" : "TikTok file"} checker <span aria-hidden="true">→</span></Link></article>)}</div><div className="explore-guides"><div><span className="overline">SOLVE COMMON PROBLEMS</span><h3>Need to fix an upload?</h3><p>Find the reason behind a file size, image dimension, video, or format problem.</p></div><ul>{guides.map((guide) => <li key={guide.slug}><Link href={`/guides/${guide.slug}`}>{guide.heading} <span aria-hidden="true">→</span></Link></li>)}</ul></div></div></section>;
+}
