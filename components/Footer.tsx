@@ -1,0 +1,3 @@
+export function Footer() {
+  return <footer className="site-footer"><div className="container footer-inner"><div><a className="brand" href="#top"><span className="brand-mark" aria-hidden="true"><span/></span><span>FileReady<span className="brand-dot">.</span></span></a><p>Check Before You Upload.</p></div><nav aria-label="Footer navigation"><a href="#how-it-works">How It Works</a><a href="#supported-files">Supported Files</a><a href="#privacy">Privacy</a><a href="#checker">Check File</a></nav></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} FileReady</span><span>Made for files going places.</span></div></footer>;
+}
