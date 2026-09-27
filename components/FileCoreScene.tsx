@@ -70,9 +70,9 @@ function FileCore({ mobile }: { mobile: boolean }) {
     if (!ref.current) return;
     ref.current.rotation.y = Math.sin(clock.elapsedTime * .24) * .08 + pointer.x * .055;
     ref.current.rotation.x = -.06 + pointer.y * .035;
-    ref.current.position.y = Math.sin(clock.elapsedTime * .42) * .055;
+    ref.current.position.y = (mobile ? 0 : .7) + Math.sin(clock.elapsedTime * .42) * .055;
   });
-  return <group ref={ref} rotation={[0, -.1, -.07]}>
+  return <group ref={ref} rotation={[0, -.1, -.07]} scale={mobile ? 1 : .9}>
     <RoundedBox args={[1.75, 2.2, .16]} radius={.12} smoothness={4} position={[-.15, .12, -.32]} rotation={[0, -.12, -.08]}><meshPhysicalMaterial color="#2563EB" metalness={.14} roughness={.22} transparent opacity={.38} /></RoundedBox>
     <RoundedBox args={[1.75, 2.2, .16]} radius={.12} smoothness={4} position={[.11, -.06, -.16]} rotation={[0, .08, .045]}><meshPhysicalMaterial color="#F8FAFC" metalness={.18} roughness={.22} transparent opacity={.36} /></RoundedBox>
     <RoundedBox args={[1.75, 2.2, .2]} radius={.12} smoothness={4} position={[0, 0, .08]}><meshPhysicalMaterial color="#0F172A" metalness={.34} roughness={.16} clearcoat={.7} clearcoatRoughness={.12} /></RoundedBox>
