@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { homeDescription, homeTitle } from "@/lib/seo";
 import { isPubliclyIndexable, siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
+import "./v11.css";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,

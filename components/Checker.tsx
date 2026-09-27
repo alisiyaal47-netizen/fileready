@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { FileUploader } from "@/components/FileUploader";
 import { FileDetails } from "@/components/FileDetails";
@@ -18,6 +18,7 @@ export function Checker({ defaultPlatformId, heading = "Make every upload a sure
   const [platformId, setPlatformId] = useState<PlatformId | null>(null);
   const [result, setResult] = useState<ValidationResult | null>(null);
   const requestId = useRef(0);
+  const reduceMotion = useReducedMotion();
 
   async function handleFile(selected: File) {
     const id = ++requestId.current;
@@ -61,11 +62,11 @@ export function Checker({ defaultPlatformId, heading = "Make every upload a sure
     <div className="checker-intro"><div><span className="overline">THE FILE CHECKER</span><h2 id="checker-heading">{heading}</h2><p>{intro}</p></div><span className="privacy-chip"><LockIcon /> Your file stays on your device</span></div>
     <div className="checker-shell"><div className="checker-shell-top"><span><span className="shell-dot"/> READY TO CHECK</span><span>01 / 03</span></div><div className="checker-content">
       {!file && <FileUploader onFile={handleFile} busy={inspecting} />}
-      {inspecting && <p role="status" className="inspection-status">Reading the selected file in your browser…</p>}
+      {inspecting && <div role="status" className="inspection-status"><span>Reading file signature and available metadata in your browser…</span><span className="inspection-rail" aria-hidden="true"><span /></span></div>}
       {error && <div className="upload-error" role="alert"><strong>We couldn&apos;t check that file.</strong><p>{error}</p><span>Choose a supported file and try again.</span></div>}
       {file && <><FileDetails file={file} onClear={clearFile}/><AnimatePresence mode="wait">
-        {!platformId && <motion.div key="selector" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}><PlatformSelector onSelect={selectPlatform}/></motion.div>}
-        {platformId && result && <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><ResultCard result={result} platform={getPlatformRule(platformId)} onBack={() => { setPlatformId(null); setResult(null); }}/></motion.div>}
+        {!platformId && <motion.div key="selector" initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}><PlatformSelector onSelect={selectPlatform}/></motion.div>}
+        {platformId && result && <motion.div key="result" initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}><ResultCard result={result} platform={getPlatformRule(platformId)} onBack={() => { setPlatformId(null); setResult(null); }}/></motion.div>}
       </AnimatePresence></>}
     </div></div>
     <p className="checker-caption">Local inspection only. No file data is sent to FileReady.</p>

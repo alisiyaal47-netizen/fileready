@@ -11,16 +11,20 @@
     "test": "tsc -p tsconfig.test.json && node .test-build/tests/checker.test.js"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
     "framer-motion": "13.4.4",
     "next": "16.3.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.186.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "16.3.6",
     "tailwindcss": "4.3.3",

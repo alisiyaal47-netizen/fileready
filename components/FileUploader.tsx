@@ -41,6 +41,7 @@ export function FileUploader({ onFile, busy }: Props) {
 
   return <div className={`dropzone ${dragging ? "dropzone-active" : ""} ${busy ? "dropzone-busy" : ""}`} onDragEnter={onDragEnter} onDragOver={(event) => event.preventDefault()} onDragLeave={onDragLeave} onDrop={onDrop} onKeyDown={onKeyDown} role="button" tabIndex={busy ? -1 : 0} aria-label="Choose a file or drag and drop it here" aria-disabled={busy} onClick={() => !busy && inputRef.current?.click()}>
     <input ref={inputRef} className="visually-hidden" type="file" accept=".jpg,.jpeg,.png,.webp,.mp4,.pdf,image/jpeg,image/png,image/webp,video/mp4,application/pdf" onChange={chooseFile} aria-label="Browse files" disabled={busy} tabIndex={-1}/>
+    <span className="dropzone-scan" aria-hidden="true" />
     <span className="upload-icon"><UploadIcon /></span>
     <strong>{busy ? "Reading your file…" : dragging ? "Drop your file here" : "Drop your file here"}</strong>
     <span>or <span className="browse-text">Browse Files</span> from your device</span>
