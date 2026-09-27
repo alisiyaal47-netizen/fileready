@@ -169,7 +169,26 @@ body { font-family: Inter, "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
 .bento-card-index { display: inline-block; color: #F8FAFC7c; font-size: .62rem; font-weight: 900; letter-spacing: .14em; }
 .bento-card h3 { margin: .75rem 0 .5rem; font-size: clamp(1.4rem, 2.4vw, 2rem); letter-spacing: -.05em; }.bento-card p { max-width: 310px; margin: 0; color: #F8FAFCa6; line-height: 1.55; font-size: .86rem; }
 .bento-private { min-height: 340px; padding-left: 2.1rem; }.bento-private .bento-icon { position: absolute; right: 2rem; top: 2rem; display: grid; place-items: center; width: 45px; height: 45px; border: 1px solid #2563EB; border-radius: .55rem; color: #F8FAFC; background: #2563EB35; }
-.bento-private h3 { margin-top: 1.2rem; }.bento-mini-window { position: absolute; left: 2.1rem; right: 2.1rem; bottom: 1.8rem; padding: .8rem 1rem; border: 1px solid #F8FAFC2e; border-radius: .55rem; background: #0F172Aaa; }.bento-mini-window div { display: flex; gap: .5rem; align-items: center; font-size: .57rem; font-weight: 900; letter-spacing: .11em; }.bento-mini-window svg { width: .8rem; height: .8rem; margin-left: auto; color: #16A34A; }.bento-mini-dot { width: 6px; height: 6px; border-radius: 50%; background: #16A34A; }.bento-mini-window i { display: block; height: 3px; margin-top: .6rem; background: #2563EB9e; }.bento-mini-window i:nth-of-type(2) { width: 72%; }.bento-mini-window i:nth-of-type(3) { width: 45%; }
+.bento-private h3 { margin-top: 1.2rem; }
+.bento-mini-window { position: absolute; left: 2.1rem; right: 2.1rem; bottom: 1.8rem; padding: .65rem .85rem .7rem; border: 1px solid #F8FAFC3b; border-radius: .6rem; background: linear-gradient(135deg, #F8FAFC12, #0F172Ae8 68%); box-shadow: inset 0 1px #F8FAFC25, 0 12px 28px #0F172A55; backdrop-filter: blur(12px); }
+.bento-mini-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .4rem; }
+.bento-mini-badge { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .45rem; border: 1px solid #2563EB6b; border-radius: .3rem; color: #F8FAFC; background: #2563EB24; font-size: .54rem; font-weight: 900; letter-spacing: .11em; }
+.bento-mini-badge svg { width: .75rem; height: .75rem; color: #F8FAFC; }.bento-mini-dot { width: 6px; height: 6px; border-radius: 50%; background: #2563EB; box-shadow: 0 0 0 3px #2563EB30; }
+.bento-mini-count { color: #F8FAFC90; font-size: .53rem; font-weight: 900; letter-spacing: .12em; }
+.bento-mini-rail { display: grid; grid-template-columns: 112px minmax(0, 1fr) 16px; gap: .65rem; align-items: center; height: 25px; font-size: .56rem; font-weight: 850; letter-spacing: .09em; }
+.bento-mini-rail:nth-child(1) { --rail-delay: .15s; }.bento-mini-rail:nth-child(2) { --rail-delay: 1.05s; }.bento-mini-rail:nth-child(3) { --rail-delay: 1.95s; }
+.bento-mini-label { color: #F8FAFCaa; }.bento-mini-track { position: relative; display: block; height: 6px; overflow: hidden; border: 1px solid #F8FAFC2f; border-radius: 3px; background: repeating-linear-gradient(90deg, #2563EB39 0 11px, #0F172A 11px 13px); box-shadow: inset 0 1px #F8FAFC15; }
+.bento-mini-track:before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, #2563EBb0 0 11px, #0F172A 11px 13px); opacity: 0; }
+.bento-mini-pulse { position: absolute; top: -1px; bottom: -1px; left: -18%; width: 18%; opacity: 0; background: linear-gradient(90deg, transparent, #2563EB, #F8FAFC); box-shadow: 0 0 8px #2563EB8a; }
+.bento-mini-check { display: grid; place-items: center; color: #16A34A; opacity: 0; }.bento-mini-check svg { width: .88rem; height: .88rem; }
+.bento-mini-window.is-active .bento-mini-label { animation: bento-label .7s ease-out both; animation-delay: var(--rail-delay); }
+.bento-mini-window.is-active .bento-mini-track:before { animation: bento-rail-on .7s ease-out both; animation-delay: var(--rail-delay); }
+.bento-mini-window.is-active .bento-mini-pulse { animation: bento-pulse .7s ease-in-out both; animation-delay: var(--rail-delay); }
+.bento-mini-window.is-active .bento-mini-check { animation: bento-check .2s ease-out both; animation-delay: calc(var(--rail-delay) + .68s); }
+@keyframes bento-label { to { color: #F8FAFC; } }
+@keyframes bento-rail-on { to { opacity: .7; } }
+@keyframes bento-pulse { 0% { left: -18%; opacity: 0; } 12%, 78% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes bento-check { to { opacity: 1; } }
 .bento-instant { background: radial-gradient(circle at 80% 90%, #2563EB48, transparent 50%), #0F172A; }.bento-speed { position: absolute; left: 1.7rem; right: 1.7rem; bottom: 2rem; display: flex; align-items: center; gap: .55rem; font-size: .62rem; font-weight: 900; letter-spacing: .1em; }.bento-speed i { flex: 1; height: 3px; background: #2563EB; box-shadow: 0 0 12px #2563EB; }.bento-speed b { color: #F8FAFC; }
 .bento-formats { min-height: 255px; }.bento-format-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 2rem; }.bento-format-row span { padding: .65rem .5rem; border: 1px solid #2563EB8a; border-radius: .4rem; background: #2563EB1d; font-size: .61rem; font-weight: 900; letter-spacing: .06em; }
 .bento-destinations { min-height: 255px; background: linear-gradient(135deg, #2563EB42, #0F172A); }.bento-destinations a { position: absolute; bottom: 1.5rem; display: inline-flex; align-items: center; gap: .5rem; color: #F8FAFC; font-size: .8rem; font-weight: 850; }.bento-destinations a svg { width: 1rem; height: 1rem; }
@@ -201,14 +220,15 @@ body { font-family: Inter, "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
   .pending-rails { grid-template-columns: repeat(2, 1fr); }
   .scanner-tunnel { padding: 1.7rem .45rem 1.7rem 2.5rem; }.scanner-spine { left: 1.4rem; }.scanner-travel-file { left: .2rem; width: 35px; height: 42px; }.scanner-gate { min-height: 125px; grid-template-columns: 22px 1fr 15px; gap: .45rem; padding: .75rem .5rem; }.gate-content small { font-size: .63rem; }.scanner-caption { margin-top: 1.2rem; }
   .network-art { width: 100%; height: 340px; left: auto; margin-left: auto; }.network-file-core { width: 117px; height: 145px; }.network-file-check { width: 42px; height: 42px; margin-bottom: .6rem; }.network-file-core strong { font-size: .62rem; }.network-file-core small { font-size: .4rem; }.network-destination { padding: .35rem .4rem; min-height: 38px; font-size: .61rem; }.network-destination span { width: 22px; height: 22px; font-size: .85rem; }.network-instagram { left: 1%; top: 12%; }.network-tiktok { right: 0; top: 14%; }.network-whatsapp { left: 0; bottom: 12%; }.network-gmail { right: 1%; bottom: 12%; }
-  .bento-grid { grid-template-columns: 1fr; }.bento-private { min-height: 320px; }.bento-card { min-height: 240px; }.bento-private .bento-icon { right: 1.3rem; }.bento-mini-window { left: 1.4rem; right: 1.4rem; }
+  .bento-grid { grid-template-columns: 1fr; }.bento-card { min-height: 240px; }.bento-private { min-height: 320px; }.bento-private .bento-icon { right: 1.3rem; }.bento-mini-window { left: 1.4rem; right: 1.4rem; }.bento-mini-rail { grid-template-columns: 100px minmax(0, 1fr) 14px; gap: .4rem; font-size: .5rem; }
 }
 @media (max-width: 360px) {
   .hero h1 { font-size: 2.85rem; }.hero-validation { padding-inline: .5rem; }.hero-validation-row { grid-template-columns: 77px 1fr 12px; }
   .network-destination strong { font-size: .55rem; }.network-destination { gap: .3rem; }.network-file-core { width: 102px; height: 130px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-format-object, .hero-signal-pulse, .validation-fill, .hero-validation-row b, .dropzone-scan:after, .inspection-rail span, .result-connection > i > i, .check-row, .check-rail span, .network-branch span { animation: none !important; }
+  .hero-format-object, .hero-signal-pulse, .validation-fill, .hero-validation-row b, .dropzone-scan:after, .inspection-rail span, .result-connection > i > i, .check-row, .check-rail span, .network-branch span, .bento-mini-label, .bento-mini-track:before, .bento-mini-pulse, .bento-mini-check { animation: none !important; }
   .validation-fill, .check-rail span { transform: scaleX(1); }.hero-validation-row b { opacity: 1; }.network-branch span { left: 55%; }
+  .bento-mini-label { color: #F8FAFC; }.bento-mini-track:before { opacity: .7; }.bento-mini-pulse { display: none; }.bento-mini-check { opacity: 1; }
   .scanner-travel-file, .scanner-spine-progress, .scanner-gate, .gate-rail span { transition: none !important; }
 }
