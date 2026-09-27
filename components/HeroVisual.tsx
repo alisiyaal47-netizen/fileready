@@ -43,7 +43,7 @@ export function HeroVisual() {
 
   const renderScene = visible && webgl && !reducedMotion && !sceneFailed;
 
-  return <div ref={container} className="hero-visual" aria-label="FileReady File Core sending a file through four validation stages to multiple destinations" role="img">
+  return <div ref={container} className={`hero-visual${visible ? " hero-visual-in-view" : ""}`} aria-label="FileReady File Core sending a file through four validation stages to multiple destinations" role="img">
     <div className="hero-visual-orbit orbit-outer" aria-hidden="true" /><div className="hero-visual-orbit orbit-inner" aria-hidden="true" />
     <svg className="hero-signal-network" viewBox="0 0 600 555" preserveAspectRatio="none" aria-hidden="true">
       <path className="hero-signal-rail" d="M 238 197 C 164 170 151 65 61 26" />

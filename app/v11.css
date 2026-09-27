@@ -82,6 +82,7 @@ body { font-family: Inter, "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
 .dropzone:hover, .dropzone-active { transform: translateY(-3px); border-color: #2563EB; box-shadow: inset 0 2px 18px #2563EB13, 0 15px 35px #2563EB14; }
 .dropzone-scan { position: absolute; inset: auto 0 0; height: 3px; background: #2563EB1d; pointer-events: none; }
 .dropzone-scan:after { content: ""; position: absolute; height: 100%; width: 34%; left: -35%; background: #2563EB; box-shadow: 0 0 16px #2563EB; animation: uploader-signal 5.5s ease-in-out infinite; }
+.dropzone-scan:after { animation-play-state: paused; }.dropzone-in-view .dropzone-scan:after { animation-play-state: running; }
 .dropzone-active .dropzone-scan:after, .dropzone-busy .dropzone-scan:after { animation-duration: 1.35s; }
 @keyframes uploader-signal { 0%, 20% { left: -35%; } 70%, 100% { left: 100%; } }
 .upload-icon { position: relative; border: 1px solid #2563EB45; border-radius: .9rem; background: #F8FAFC; box-shadow: 0 7px 18px #2563EB19, inset 0 0 18px #2563EB0d; transition: transform .3s; }
@@ -155,6 +156,7 @@ body { font-family: Inter, "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
 .network-file-core strong { font-size: .75rem; letter-spacing: .13em; }.network-file-core small { margin-top: .45rem; font-size: .47rem; letter-spacing: .12em; color: #F8FAFC9f; }
 .network-branch { position: absolute; z-index: 1; top: 50%; left: 50%; width: 32%; height: 2px; background: #2563EB40; transform-origin: left center; opacity: .8; transition: opacity .25s, background .25s; }
 .network-branch span { position: absolute; width: 24px; height: 100%; background: #2563EB; box-shadow: 0 0 10px #2563EB; animation: branch-signal 3.5s ease-in-out infinite; }
+.network-branch span { animation-play-state: paused; }.network-in-view .network-branch span { animation-play-state: running; }
 @keyframes branch-signal { from { left: 0; } to { left: calc(100% - 24px); } }
 .branch-instagram { transform: rotate(-145deg); }.branch-tiktok { transform: rotate(-35deg); }.branch-whatsapp { transform: rotate(145deg); }.branch-gmail { transform: rotate(35deg); }
 .network-active .network-branch { opacity: .2; }.network-active-instagram .branch-instagram, .network-active-tiktok .branch-tiktok, .network-active-whatsapp .branch-whatsapp, .network-active-gmail .branch-gmail { opacity: 1; background: #2563EB; }
@@ -192,6 +194,14 @@ body { font-family: Inter, "Segoe UI Variable", "Segoe UI", Arial, sans-serif; }
 .bento-instant { background: radial-gradient(circle at 80% 90%, #2563EB48, transparent 50%), #0F172A; }.bento-speed { position: absolute; left: 1.7rem; right: 1.7rem; bottom: 2rem; display: flex; align-items: center; gap: .55rem; font-size: .62rem; font-weight: 900; letter-spacing: .1em; }.bento-speed i { flex: 1; height: 3px; background: #2563EB; box-shadow: 0 0 12px #2563EB; }.bento-speed b { color: #F8FAFC; }
 .bento-formats { min-height: 255px; }.bento-format-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 2rem; }.bento-format-row span { padding: .65rem .5rem; border: 1px solid #2563EB8a; border-radius: .4rem; background: #2563EB1d; font-size: .61rem; font-weight: 900; letter-spacing: .06em; }
 .bento-destinations { min-height: 255px; background: linear-gradient(135deg, #2563EB42, #0F172A); }.bento-destinations a { position: absolute; bottom: 1.5rem; display: inline-flex; align-items: center; gap: .5rem; color: #F8FAFC; font-size: .8rem; font-weight: 850; }.bento-destinations a svg { width: 1rem; height: 1rem; }
+
+/* Keep the file action within reach when a filename is unusually long. */
+.file-details h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
+/* Decorative loops run only while their visual is near the viewport. */
+.hero-signal-pulse, .hero-format-object, .validation-fill, .hero-validation-row b { animation-play-state: paused; }
+.hero-visual-in-view .hero-signal-pulse, .hero-visual-in-view .hero-format-object, .hero-visual-in-view .validation-fill, .hero-visual-in-view .hero-validation-row b { animation-play-state: running; }
+.hero-format-hidden .hero-format-object { animation-play-state: paused; }
 
 @media (max-width: 1050px) {
   .hero { grid-template-columns: .9fr 1.1fr; gap: 1rem; }.hero h1 { font-size: clamp(3.5rem, 6vw, 5rem); }.hero-visual { height: 510px; }
